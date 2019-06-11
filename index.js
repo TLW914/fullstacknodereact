@@ -3,6 +3,7 @@ const cookieSession = require('cookie-session');
 const passport = require('passport');
 const bodyParser = require('body-parser');
 require('./models/User');
+require('./models/Survey');
 require('./services/passport');
 const mongoose = require('mongoose');
 const keys = require('./config/keys');
@@ -12,8 +13,8 @@ mongoose.connect(keys.mongoURI);
 const app = express();
 
 //middlewares
-
 app.use(bodyParser.json());
+
 //enable cookies inside our application
 app.use(
   cookieSession({
@@ -28,6 +29,7 @@ app.use(passport.session());
 
 require('./routes/authRoutes')(app);
 require('./routes/billingRoutes')(app);
+require('./routes/surveyRoutes')(app);
 
 //code only runs in production
 if (process.env.NODE_ENV === 'production') {
