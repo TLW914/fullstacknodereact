@@ -3,12 +3,16 @@
 
 import React from 'react';
 
-export default ({ input, label }) => {
-  //input prop passed from reduxForm
+export default ({ input, label, meta: { error, touched } }) => {
+  //input, label, meta props passed from reduxForm
+  //console.log(meta)
   return (
     <div>
       <label>{label}</label>
-      <input {...input} />
+      <input {...input} style={{ marginBottom: '10px' }} />
+      <div className="red-text" style={{ marginBottom: '20px' }}>
+        {touched && error}
+      </div>
     </div>
   );
 };
